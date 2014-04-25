@@ -1,5 +1,5 @@
-import com.ifountain.opsgenie.client.http.OpsGenieHttpClient
-import com.ifountain.opsgenie.client.util.ClientConfiguration
+import com.ifountain.client.http.HttpClient
+import com.ifountain.client.util.ClientConfiguration
 import org.apache.commons.lang.StringEscapeUtils
 import org.apache.http.HttpHost
 
@@ -339,7 +339,7 @@ def createHttpClient() {
         timeout = timeout.toInteger();
     }
     ClientConfiguration clientConfiguration = new ClientConfiguration().setSocketTimeout(timeout)
-    return new OpsGenieHttpClient(clientConfiguration)
+    return new HttpClient(clientConfiguration)
 }
 
 def getUrl(String confProperty, String backwardCompatabilityUrl) {

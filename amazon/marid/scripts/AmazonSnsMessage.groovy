@@ -1,6 +1,6 @@
 import com.amazonaws.services.cloudwatch.model.Dimension
 import com.ifountain.opsgenie.client.marid.http.HTTPRequest
-import com.ifountain.opsgenie.client.util.JsonUtils
+import com.ifountain.client.util.JsonUtils
 import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsResult
 import org.jfree.chart.axis.DateAxis
 import org.jfree.chart.axis.DateTickUnit

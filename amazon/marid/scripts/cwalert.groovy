@@ -1,4 +1,5 @@
-import com.ifountain.opsgenie.client.OpsGenieClientException
+import com.ifountain.client.ClientException
+import com.ifountain.client.ClientException
 
 /********************** CONFIGURATION ************************/
 //recipients can be users or groups created in OpsGenie
@@ -75,7 +76,7 @@ def processAlert(AmazonSnsMessage snsMessage){
             logger.warn("Closing alert with alias:[${alertProps.alias}]")
             opsgenie.closeAlert(alertProps);
         }
-        catch (OpsGenieClientException clientEx){
+        catch (ClientException clientEx){
             logger.warn("Can't close alert with alias:[${alertProps.alias}], possibly deleted. Reason: ${clientEx}")
         }
         return "";

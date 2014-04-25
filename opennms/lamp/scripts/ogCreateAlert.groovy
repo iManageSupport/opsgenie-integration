@@ -1,5 +1,5 @@
-import com.ifountain.opsgenie.client.http.OpsGenieHttpClient
-import com.ifountain.opsgenie.client.util.ClientConfiguration
+import com.ifountain.client.http.HttpClient
+import com.ifountain.client.util.ClientConfiguration
 import org.apache.commons.lang.StringEscapeUtils
 import org.apache.http.auth.UsernamePasswordCredentials
 
@@ -188,7 +188,7 @@ def restCall(nodeId){
     String url = getUrl(nodeId)
 	logger.warn("Getting node outages from url ${url}");
     println "Getting node outages from url ${url}"
-    OpsGenieHttpClient httpClient = createHttpClient();
+    HttpClient httpClient = createHttpClient();
 	try {
         def response = httpClient.get(getUrl(nodeId), [:])
 
@@ -218,7 +218,7 @@ def createHttpClient() {
     }
     ClientConfiguration clientConfiguration = new ClientConfiguration().setSocketTimeout(timeout).
             setCredentials(new UsernamePasswordCredentials(OPENNMS_USER, OPENNMS_PASSWORD));
-    return new OpsGenieHttpClient(clientConfiguration)
+    return new HttpClient(clientConfiguration)
 }
 
 def getUrl(String nodeId) {

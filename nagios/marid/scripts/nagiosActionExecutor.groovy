@@ -1,5 +1,6 @@
-import com.ifountain.opsgenie.client.http.OpsGenieHttpClient
-import com.ifountain.opsgenie.client.util.ClientConfiguration
+import com.ifountain.client.http.HttpClient
+import com.ifountain.client.http.HttpClient
+import com.ifountain.client.util.ClientConfiguration
 import org.apache.http.HttpHost
 import org.apache.http.auth.UsernamePasswordCredentials
 
@@ -71,7 +72,7 @@ def createHttpClient() {
     }
     ClientConfiguration clientConfiguration = new ClientConfiguration().setSocketTimeout(timeout)
             .setCredentials(new UsernamePasswordCredentials(_conf("user", true), _conf("password", true)))
-    return new OpsGenieHttpClient(clientConfiguration)
+    return new HttpClient(clientConfiguration)
 }
 
 def getUrl() {
@@ -90,11 +91,11 @@ def getUrl() {
 
 
 def postToNagios(Map<String, String> postParams) {
-    OpsGenieHttpClient HTTP_CLIENT = createHttpClient();
+    HttpClient HTTP_CLIENT = createHttpClient();
     try {
         String url = getUrl();
         logger.debug("${LOG_PREFIX} Posting to Nagios. Url ${url} params:${postParams}")
-        def response = ((OpsGenieHttpClient) HTTP_CLIENT).post(url, postParams)
+        def response = ((HttpClient) HTTP_CLIENT).post(url, postParams)
         if (response.getStatusCode() == 200) {
             logger.info("${LOG_PREFIX} Successfully executed at Nagios.");
             logger.debug("${LOG_PREFIX} Nagios response: ${response.getContentAsString()}")
