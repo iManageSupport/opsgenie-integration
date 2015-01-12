@@ -1,0 +1,30 @@
+task prepareIcinga(dependsOn: 'generateIntegration') {
+    doLast {
+        def destination = "${project.buildDir}/icinga"
+        copy{
+            from "${project.buildDir}/opsgenie-integration"
+            into "${destination}/opsgenie-integration"
+        }
+
+        copy{
+            from "${project.projectDir}/icinga/marid"
+            into "${destination}/opsgenie-integration/marid"
+        }
+
+        copy{
+            from "${project.projectDir}/icinga/icinga"
+            into "${destination}/icinga"
+        }
+
+        mergeConfFile("${project.buildDir}/opsgenie-integration/conf/opsgenie-integration.conf",
+                "${project.projectDir}/icinga/common/opsgenie-integration.conf.part",
+                "${destination}/opsgenie-integration/conf/opsgenie-integration.conf")
+    }
+}
+
+task packageIcingaZip(dependsOn: 'prepareIcinga', type: Zip) {
+    from "${project.buildDir}/icinga"
+    baseName = 'opsgenie-icinga'
+}
+
+task packageIcinga(dependsOn: 'packageIcinga')
