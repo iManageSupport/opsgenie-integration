@@ -9,11 +9,11 @@ action: create ||
 id: {{ticket.id}} ||
 status: {{ticket.status}} ||
 title: {{ticket.title}} ||
-tags: {{ticket.tags}} ||
+tags: {{ticket.24x7}} ||
 link: {{ticket.link}} ||
 external_id: {{ticket.external_id}} ||
 via: {{ticket.via}} ||
-priority: {{ticket.priority}} ||
+priority: {{ticket.urgent}} ||
 ticket_type: {{ticket.ticket_type}} ||
 score: {{ticket.score}} ||
 groupname: {{ticket.group.name}} ||
